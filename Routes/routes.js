@@ -44,18 +44,18 @@ const authenticateUser = async (req, res, next) => {
                     req.body.id = user.id;
                 }
             } else {
-                
+
                 message = `Authentication failed for user: ${user.firstName} ${user.lastName}`;
             }
         } else {
-            // No email matching the Authorization header
+            // email address not found
             message = `User not found for email address: ${credentials.name}`;
         }
     } else {
-        //No user credentials/authorization header available
+        // credentials/authorization header available not found
         message = 'Authorization header not found';
     }
-    // Deny Access if there is anything stored in message
+
     if (message) {
         console.warn(message);
         const err = new Error('Access Denied');
